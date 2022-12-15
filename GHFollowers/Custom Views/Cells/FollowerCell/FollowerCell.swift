@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class FollowerCell: UICollectionViewCell {
     static let reuseID = "FollowerCell"
@@ -23,14 +24,13 @@ class FollowerCell: UICollectionViewCell {
     }
     
     func set(follower: Follower) {
-        usernameLabel.text = follower.login
-        avatarImageView.downloadImage(from: follower.avatarUrl)
+        contentConfiguration = UIHostingConfiguration {
+            FollowerView(follower: follower)
+        }
     }
     
     private func configure() {
-        addSubview(avatarImageView)
-        addSubview(usernameLabel)
-        
+        addSubviews(avatarImageView, usernameLabel)
         let padding: CGFloat = 8
         
         NSLayoutConstraint.activate([
